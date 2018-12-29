@@ -13,10 +13,23 @@
     components: {
     },
 
+    filters: {
+      escapeLineBreak: function(value) {
+        return value
+          .replace(/\n/g, "\\n")
+          .replace(/\r/g, "\\r");
+      }
+    },
+
     data: {
       input: "",
-      outputDelimiter: "\n",
-      drawer: false
+      rowDelimiter: "\n",
+      drawer: true,
+
+      rowDelimiters: [
+        {label: "\\n", value: "\n"},
+        {label: "\\r\\n", value: "\r\n"}
+      ]
     },
 
     computed: {
@@ -33,7 +46,7 @@
             return value.length > 0 ? value + "," : value;
           });
 
-        output = values.join(this.outputDelimiter);
+        output = values.join(this.rowDelimiter);
 
         return output;
       }

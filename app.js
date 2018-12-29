@@ -10,9 +10,6 @@
   new Vue({
     el: "#app",
 
-    components: {
-    },
-
     filters: {
       escapeLineBreak: function(value) {
         return value
@@ -25,36 +22,46 @@
       input: "",
       rowDelimiter: "\n",
       drawer: true,
-
       rowDelimiters: [
         {label: "\\n", value: "\n"},
         {label: "\\r\\n", value: "\r\n"}
-      ]
+      ],
+      wrapInSingleQuotes: false
     },
 
     computed: {
       output: function() {
-        var output = this.input;
+        return this.inputValues
+          .map(this.formatValue)
+          .join(this.rowDelimiter);
+      },
 
-        output = output.replace(/\r/g, "");
+      inputValues: function() {
+        return this.input.replace(/\r/g, "").split(/\n/);
+      }
+    },
 
-        var values = output.split(/\n/);
-
-        values = values
-          .map(String)
-          .map(function(value) {
-            return value.length > 0 ? value + "," : value;
-          });
-
-        output = values.join(this.rowDelimiter);
-
-        return output;
+    watch: {
+      input: function() {
       }
     },
 
     methods: {
-    },
-    mounted: function() {
+      formatValue: function(value) {
+        value = String(value);
+
+        if (value.length == 0) {
+          return value;
+        }
+
+        if (this.wrapInSingleQuotes) {
+          value = "'" + value + "'";
+        }
+
+        value += ",";
+
+        return value;
+      }
     }
   });
 })();

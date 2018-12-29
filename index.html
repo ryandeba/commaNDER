@@ -25,7 +25,7 @@
         >
           
           <v-list dense>
-            <v-list-tile @click="">
+            <v-list-tile>
               <v-list-tile-action>
                 <v-icon>fas fa-list-ul</v-icon>
               </v-list-tile-action>
@@ -46,6 +46,15 @@
                     </v-list-tile>
                   </v-list>
                 </v-menu>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile avatar @click="wrapInSingleQuotes = !wrapInSingleQuotes">
+              <v-list-tile-action>
+                <v-checkbox v-model="wrapInSingleQuotes" @click.prevent=""></v-checkbox>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Text</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>

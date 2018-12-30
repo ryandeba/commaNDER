@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <title>commaNDER</title>
+    <title>commaND</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue2-animate@2.1.0/dist/vue2-animate.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
@@ -62,7 +63,18 @@
 
         <v-toolbar app fixed clipped-left>
           <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-          <v-toolbar-title>commaNDER</v-toolbar-title>
+          <v-toolbar-title v-on:mouseenter="expandTitle = true" v-on:mouseleave="expandTitle = false" style="padding-right: 10px;">
+            <transition name="slideDown" mode="out-in">
+              <div :key="expandTitle" style="animation-duration: 0.2s">
+                <template v-if="expandTitle">
+                  <i>Comma</i> <i>N</i>otater & <i>D</i>elimit<i>er</i>
+                </template>
+                <template v-else>
+                  commaNDer
+                </template>
+              </div>
+            </transition>
+          </v-toolbar-title>
         </v-toolbar>
 
         <v-content>

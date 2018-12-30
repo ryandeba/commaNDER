@@ -26,7 +26,8 @@
         {label: "\\n", value: "\n"},
         {label: "\\r\\n", value: "\r\n"}
       ],
-      wrapInSingleQuotes: false
+      wrapInSingleQuotes: false,
+      expandTitle: false
     },
 
     computed: {

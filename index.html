@@ -82,11 +82,47 @@
 
             <v-layout justify-center align-center>
               <v-flex shrink>
-                <div>Input:</div>
-                <textarea v-model="input"></textarea>
+                <v-card>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline mb-0">Input</div>
+                    </div>
+                  </v-card-title>
 
-                <div>Output:</div>
-                <textarea :value="output"></textarea>
+                  <v-card-text>
+                    <textarea v-model="input"></textarea>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-btn flat color="blue" v-on:click="paste">
+                      <v-icon style="margin-right: 8px;">fas fa-paste</v-icon>
+                      Paste
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+            </v-layout>
+
+            <v-layout justify-center align-center>
+              <v-flex shrink>
+                <v-card>
+                  <v-card-title primary-title>
+                    <div>
+                      <div class="headline mb-0">Output</div>
+                    </div>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <textarea :value="output" readonly></textarea>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-btn flat color="blue" v-on:click="copy">
+                      <v-icon style="margin-right: 8px;">fas fa-copy</v-icon>
+                      Copy
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
               </v-flex>
             </v-layout>
           </v-container>

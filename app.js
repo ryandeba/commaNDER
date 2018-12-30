@@ -62,6 +62,25 @@
         value += ",";
 
         return value;
+      },
+
+      paste: function() {
+        var self = this;
+
+        navigator.clipboard.readText()
+          .then(function(clipboardText) {
+            self.input = clipboardText;
+          });
+      },
+
+      copy: function() {
+        var self = this;
+
+        navigator.clipboard.writeText(self.output)
+          .then(
+            function() {},
+            function() {},
+          );
       }
     }
   });

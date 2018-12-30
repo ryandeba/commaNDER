@@ -6,4 +6,5 @@ textarea {
   border: 1px solid #ccc;
   min-width: 400px;
   min-height: 220px;
+  resize: none;
 }

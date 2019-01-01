@@ -34,7 +34,7 @@
               <v-list-tile-content>
                 <v-menu absolute>
                   <v-list-tile-title slot="activator">
-                    Row Delimiter ({{ rowDelimiter | escapeLineBreak }})
+                    Line Endings ({{ rowDelimiter | escapeLineBreak }})
                   </v-list-tile-title>
 
                   <v-list>
@@ -69,6 +69,7 @@
                 <template v-if="expandTitle">
                   <i>Comma</i> <i>N</i>otater & <i>D</i>elimit<i>er</i>
                 </template>
+
                 <template v-else>
                   commaNDer
                 </template>
@@ -78,10 +79,9 @@
         </v-toolbar>
 
         <v-content>
-          <v-container fluid fill-height>
-
-            <v-layout justify-center align-center>
-              <v-flex shrink>
+          <v-container fluid fill-height grid-list-md>
+            <v-layout>
+              <v-flex xs6>
                 <v-card>
                   <v-card-title primary-title>
                     <div>
@@ -101,10 +101,8 @@
                   </v-card-actions>
                 </v-card>
               </v-flex>
-            </v-layout>
 
-            <v-layout justify-center align-center>
-              <v-flex shrink>
+              <v-flex xs6>
                 <v-card>
                   <v-card-title primary-title>
                     <div>

@@ -1,12 +1,4 @@
 (function() {
-  /*
-    TODO
-      make this a thing where you can plug in a list of values and it will output a comma delimited version
-
-      copy button
-
-      optional text qualifier
-  */
   new Vue({
     el: "#app",
 

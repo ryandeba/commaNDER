@@ -4,7 +4,7 @@
 
 textarea {
   border: 1px solid #ccc;
-  min-width: 400px;
-  min-height: 220px;
+  width: 100%;
   resize: none;
-}
+  height: calc(100vh - 280px); /* lame! */
+

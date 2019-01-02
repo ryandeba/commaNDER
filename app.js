@@ -11,15 +11,18 @@
     },
 
     data: {
+      expandTitle: false,
+      settingsDialog: false,
+
       input: "",
       rowDelimiter: "\n",
-      drawer: true,
       rowDelimiters: [
         {label: "\\n", value: "\n"},
         {label: "\\r\\n", value: "\r\n"}
       ],
       wrapInSingleQuotes: false,
-      expandTitle: false
+      prefix: "",
+      postfix: "",
     },
 
     computed: {
@@ -31,11 +34,6 @@
 
       inputValues: function() {
         return this.input.replace(/\r/g, "").split(/\n/);
-      }
-    },
-
-    watch: {
-      input: function() {
       }
     },
 
@@ -52,6 +50,14 @@
         }
 
         value += ",";
+
+        if (this.prefix.length > 0) {
+          value = this.prefix + " " + value;
+        }
+
+        if (this.postfix.length > 0) {
+          value += " " + this.postfix;
+        }
 
         return value;
       },
@@ -70,9 +76,14 @@
 
         navigator.clipboard.writeText(self.output)
           .then(
-            function() {},
-            function() {},
+            function() { /* success */},
+            function() { /* failure */},
           );
+      },
+
+      resetWrapSettings: function() {
+        this.prefix = "";
+        this.postfix = "";
       }
     }
   });

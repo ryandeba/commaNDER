@@ -2,9 +2,12 @@
   display: none;
 }
 
-textarea {
+.io {
   border: 1px solid #ccc;
   width: 100%;
-  resize: none;
   height: calc(100vh - 280px); /* lame! */
+}
 
+textarea {
+  resize: none;
+}

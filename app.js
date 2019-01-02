@@ -23,6 +23,7 @@
       wrapInSingleQuotes: false,
       prefix: "",
       postfix: "",
+      mapFnString: ""
     },
 
     computed: {
@@ -34,6 +35,46 @@
 
       inputValues: function() {
         return this.input.replace(/\r/g, "").split(/\n/);
+      },
+
+      mapFn: function() {
+        var fn;
+
+        try {
+          if (this.mapFnString.length > 0) {
+            eval("var fn = function(value) { return " + this.mapFnString + " };");
+          }
+
+          if (typeof fn != "function") {
+            throw("fn is not a function");
+          }
+
+          fn("test"); // test it to make sure that it actually executes with a simple string value
+        } catch (e) {
+          var fn = undefined;
+        }
+
+        return fn;
+      },
+
+      mapFnStringErrorMessages: function() {
+        var errors = [];
+
+        if (this.mapFnString.length > 0) {
+          if (typeof this.mapFn != "function") {
+            errors.push("Invalid function");
+          }
+        }
+
+        return errors;
+      }
+    },
+
+    watch:{
+      mapFnString: function() {
+        if (typeof this.mapFnString != "string") {
+          this.mapFnString = ""; // the clear button sets this to null :(
+        }
       }
     },
 
@@ -45,18 +86,22 @@
           return value;
         }
 
-        if (this.wrapInSingleQuotes) {
-          value = "'" + value + "'";
-        }
+        if (typeof this.mapFn == "function") {
+          value = this.mapFn(value);
+        } else {
+          if (this.wrapInSingleQuotes) {
+            value = "'" + value + "'";
+          }
 
-        value += ",";
+          value += ",";
 
-        if (this.prefix.length > 0) {
-          value = this.prefix + " " + value;
-        }
+          if (this.prefix.length > 0) {
+            value = this.prefix + " " + value;
+          }
 
-        if (this.postfix.length > 0) {
-          value += " " + this.postfix;
+          if (this.postfix.length > 0) {
+            value += " " + this.postfix;
+          }
         }
 
         return value;

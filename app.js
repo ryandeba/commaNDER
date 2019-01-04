@@ -20,7 +20,7 @@
         {label: "\\n", value: "\n"},
         {label: "\\r\\n", value: "\r\n"}
       ],
-      wrapInSingleQuotes: false,
+      wrapMode: "smart", // "smart", "text", or "none"
       prefix: "",
       postfix: "",
       mapFnString: ""
@@ -89,7 +89,15 @@
         if (typeof this.mapFn == "function") {
           value = this.mapFn(value);
         } else {
-          if (this.wrapInSingleQuotes) {
+          var wrapInSingleQuotes = false;
+
+          if (this.wrapMode == "text") {
+            wrapInSingleQuotes = true;
+          } else if (this.wrapMode == "smart") {
+            wrapInSingleQuotes = /[^0-9]/.test(String(value));
+          }
+
+          if (wrapInSingleQuotes) {
             value = "'" + value + "'";
           }
 

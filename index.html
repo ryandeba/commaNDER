@@ -94,11 +94,11 @@
               <v-container fluid grid-list-xl text-xs-center>
                 <v-layout wrap align-center>
                   <v-flex xs12>
-                    <v-checkbox
-                      v-model="wrapInSingleQuotes"
-                      label="Text (wrap in single quotes)"
-                      :disabled="mapFnString.length > 0"
-                    ></v-checkbox>
+                    <v-radio-group v-model="wrapMode" label="Value Wrap Mode">
+                      <v-radio label="Smart (automatically detect text mode for each value)" value="smart"></v-radio>
+                      <v-radio label="Text (wrap in single quotes)" value="text"></v-radio>
+                      <v-radio label="None" value="none"></v-radio>
+                    </v-radio-group>
                   </v-flex>
 
                   <v-flex xs4>

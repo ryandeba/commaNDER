@@ -22,6 +22,7 @@
       ],
       mode: "simple", // "simple", "advanced", "function"
       wrapMode: "smart", // "smart", "text", or "none"
+      addSpaces: true,
       prefix: "",
       postfix: "",
       mapFnString: ""
@@ -103,10 +104,16 @@
           value += ",";
         } else if (this.mode == "advanced") {
           if (this.prefix.length > 0) {
+            if (this.addSpaces) {
+              value = " " + value;
+            }
             value = this.prefix + value;
           }
 
           if (this.postfix.length > 0) {
+            if (this.addSpaces) {
+              value = value + " ";
+            }
             value += this.postfix;
           }
         } else if (this.mode == "function") {

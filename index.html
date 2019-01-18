@@ -141,13 +141,17 @@
                         reset
                       </v-btn>
                     </v-flex xs2>
+
+                    <v-flex xs12>
+                      <v-checkbox label="Automatically add spaces around each row value" v-model="addSpaces"></v-checkbox>
+                    </v-flex>
                   </template>
 
                   <v-flex xs12 v-if="mode == 'function'">
                     <v-text-field
                       v-model="mapFnString"
                       label="Custom Formatting Function"
-                      hint="value.toLowerCase(); // `value` is the only variable provided"
+                      hint="value.toLowerCase(); // `value` is the only variable available"
                       :error-messages="mapFnStringErrorMessages"
                       clearable
                       box

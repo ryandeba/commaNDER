@@ -94,6 +94,18 @@
               <v-container fluid grid-list-xl text-xs-center>
                 <v-layout wrap align-center>
                   <v-flex xs12>
+                    <v-radio-group v-model="mode" label="Mode">
+                      <v-radio label="Basic (each row will be appended with a comma, with optional text quoting)" value="simple"></v-radio>
+                      <v-radio label="Advanced (prepend/append each row with custom values)" value="advanced"></v-radio>
+                      <v-radio label="Expert (write the internals of a map function)" value="function"></v-radio>
+                    </v-radio-group>
+                  </v-flex>
+
+                  <v-flex xs12>
+                    <v-divider></v-divider>
+                  </v-flex>
+
+                  <v-flex xs12 v-if="mode == 'simple'">
                     <v-radio-group v-model="wrapMode" label="Value Wrap Mode">
                       <v-radio label="Smart (automatically detect text mode for each value)" value="smart"></v-radio>
                       <v-radio label="Text (wrap in single quotes)" value="text"></v-radio>
@@ -101,37 +113,37 @@
                     </v-radio-group>
                   </v-flex>
 
-                  <v-flex xs4>
-                    <v-text-field
-                      v-model="prefix"
-                      label="Prepend"
-                      hint="String to prepend before each value"
-                      box
-                      :disabled="mapFnString.length > 0"
-                    ></v-text-field>
-                  </v-flex>
+                  <template v-if="mode == 'advanced'">
+                    <v-flex xs4>
+                      <v-text-field
+                        v-model="prefix"
+                        label="Prepend"
+                        hint="String to prepend before each value"
+                        box
+                      ></v-text-field>
+                    </v-flex>
 
-                  <v-flex xs2 align-self-center>
-                    { row value }
-                  </v-flex xs4>
+                    <v-flex xs2 align-self-center>
+                      { row value }
+                    </v-flex xs4>
 
-                  <v-flex xs4>
-                    <v-text-field
-                      v-model="postfix"
-                      label="Append"
-                      hint="String to append after each value"
-                      box
-                      :disabled="mapFnString.length > 0"
-                    ></v-text-field>
-                  </v-flex>
+                    <v-flex xs4>
+                      <v-text-field
+                        v-model="postfix"
+                        label="Append"
+                        hint="String to append after each value"
+                        box
+                      ></v-text-field>
+                    </v-flex>
 
-                  <v-flex xs2 align-self-center>
-                    <v-btn color="white" flat @click="resetWrapSettings">
-                      reset
-                    </v-btn>
-                  </v-flex xs2>
+                    <v-flex xs2 align-self-center>
+                      <v-btn color="white" flat @click="resetWrapSettings">
+                        reset
+                      </v-btn>
+                    </v-flex xs2>
+                  </template>
 
-                  <v-flex xs12>
+                  <v-flex xs12 v-if="mode == 'function'">
                     <v-text-field
                       v-model="mapFnString"
                       label="Custom Formatting Function"

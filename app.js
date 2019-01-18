@@ -20,6 +20,7 @@
         {label: "\\n", value: "\n"},
         {label: "\\r\\n", value: "\r\n"}
       ],
+      mode: "simple", // "simple", "advanced", "function"
       wrapMode: "smart", // "smart", "text", or "none"
       prefix: "",
       postfix: "",
@@ -86,9 +87,7 @@
           return value;
         }
 
-        if (typeof this.mapFn == "function") {
-          value = this.mapFn(value);
-        } else {
+        if (this.mode == "simple") {
           var wrapInSingleQuotes = false;
 
           if (this.wrapMode == "text") {
@@ -102,13 +101,19 @@
           }
 
           value += ",";
-
+        } else if (this.mode == "advanced") {
           if (this.prefix.length > 0) {
-            value = this.prefix + " " + value;
+            value = this.prefix + value;
           }
 
           if (this.postfix.length > 0) {
-            value += " " + this.postfix;
+            value += this.postfix;
+          }
+        } else if (this.mode == "function") {
+          if (!this.mapFn) {
+            value = "Map function is not valid";
+          } else {
+            value = this.mapFn(value);
           }
         }
 
